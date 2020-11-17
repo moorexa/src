@@ -4,8 +4,8 @@ return [
 
     // scaffolding 
     'scaffold' => [
-        'path'      => PATH_TO_CONSOLE . '/Helper/Scaffolding/',
-        'assist'    => PATH_TO_CONSOLE . '/Helper/Scaffold.php'
+        'path'      => constant('PATH_TO_CONSOLE') . '/Helper/Scaffolding/',
+        'assist'    => constant('PATH_TO_CONSOLE') . '/Helper/Scaffold.php'
     ]
 
 ];

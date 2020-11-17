@@ -1,6 +1,7 @@
 <?php
 namespace Classes\Platforms;
 
+use Lightroom\Exceptions\ClassNotFound;
 use Lightroom\Core\{
     Payload, BootCoreEngine
 };
@@ -12,7 +13,7 @@ use Lightroom\Packager\Moorexa\Configuration\DefaultPackagerConfiguration;
  * @package Platform Launcher
  * @author Amadi Ifeanyi <amadiify.com>
  * 
- * Payload manager for multiple platforms. Simply intresting... 
+ * Payload manager for multiple platforms. Simply interesting...
  */
 class Launcher implements PackageManagerInterface
 {
@@ -35,7 +36,6 @@ class Launcher implements PackageManagerInterface
      * @method Launcher registerPayload for multiple platforms using headers
      * @param Payload $payload
      * @param BootCoreEngine $engine
-     * @throws ClassNotFound
      */
     public function registerPayload(Payload &$payload, BootCoreEngine $engine)
     {
@@ -61,6 +61,7 @@ class Launcher implements PackageManagerInterface
     /**
      * @method Launcher ApiPlatform
      * @return bool
+     * @throws ClassNotFound
      */
     private function ApiPlatform() : bool
     {
@@ -74,6 +75,7 @@ class Launcher implements PackageManagerInterface
     /**
      * @method Launcher WebPlatform
      * @return bool
+     * @throws ClassNotFound
      */
     private function WebPlatform() : bool
     {
@@ -87,6 +89,7 @@ class Launcher implements PackageManagerInterface
     /**
      * @method Launcher CliPlatform
      * @return bool
+     * @throws ClassNotFound
      */
     private function CliPlatform() : bool
     {

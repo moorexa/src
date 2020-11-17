@@ -56,7 +56,7 @@ class Cli implements PlatformInterface
                     // application
 					$app = explode(' ', $query);
 					
-					// agrv
+					// args
 					array_unshift($app, 'assist');
 
 					// update argv

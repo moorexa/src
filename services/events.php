@@ -10,4 +10,7 @@ use Lightroom\Events\{
  * 
  * Here you can attach an event class, register it's method, listen for an event, dispatch an event
  */
-AttachEvent::attach(Lightroom\Events\ExampleBasic::class, 'ev');
+try {
+    AttachEvent::attach(Lightroom\Events\ExampleBasic::class, 'ev');
+
+} catch (\Lightroom\Exceptions\ClassNotFound $e) {}

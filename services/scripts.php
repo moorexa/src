@@ -10,7 +10,7 @@ use Lightroom\Packager\Moorexa\Helpers\ScriptManager;
 ScriptManager::execute([
     /**
      * @example 
-     * '<method>' => ExampleNamespace\Myclass::class
+     * '<method>' => ExampleNamespace\MyClass::class
      * 
      * Method should be a static public method.
      */

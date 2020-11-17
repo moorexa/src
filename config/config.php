@@ -1,8 +1,8 @@
 <?php
 
-use Lightroom\Adapter\{
-	Configuration\ConfigurationSocketHandler, ClassManager
-};
+use Lightroom\Adapter\{Configuration\ConfigurationSocketHandler,
+    ClassManager,
+    Configuration\Interfaces\ConfigurationSocketInterface};
 use function Lightroom\Functions\GlobalVariables\var_set;
 
 
@@ -15,11 +15,12 @@ $socket = var_set('socket', ClassManager::singleton(ConfigurationSocketHandler::
  * Build configuration socket setting
  * We are linking this method via ConfigurationSocketHandler
  * They read a class, and class a method that in turn pushes the return value the Lightroom\Adapter\Configuration\Environment class.
- * You can acess this configurations via env(string name, mixed value);
+ * You can access this configurations via env(string name, mixed value);
  */
+/** @var mixed $config */
 $config->configurationSocket([
 	'bootstrap'  => $socket->setClass(Lightroom\Packager\Moorexa\BootloaderConfiguration::class)->setMethod('loadBootstrap'),
-	'finder'	 => $socket->setClass(Lightroom\Packager\Moorexa\BootloaderConfiguration::class)->setMethod('loadFinder'),
+	'finder'	     => $socket->setClass(Lightroom\Packager\Moorexa\BootloaderConfiguration::class)->setMethod('loadFinder'),
 ]);
 
 
@@ -57,10 +58,10 @@ $config->bootstrap ([
 	/*
 	 ***************************
 	 * 
-	 * @config.maintaince-mode (default = false) 
+	 * @config.maintenance-mode (default = false)
 	 * info: generates a maintenance mode template
 	*/
-	"maintaince-mode" => false,
+	"maintenance-mode" => false,
 
 
 	/*
@@ -87,11 +88,10 @@ $config->bootstrap ([
 	 * 
 	 * @config.force.https (default = false) 
 	 * info: force https for all route requests.
-	 * You could also include paths and seperate them with a comma (,)
+	 * You could also include paths and separate them with a comma (,)
 	 * (*) wildcard also supported.
 	 * eg . app/*, *
 	*/
-
 	"force.https" => false,
 
 
@@ -107,10 +107,10 @@ $config->bootstrap ([
 	/*
 	 ***************************
 	 * 
-	 * @config.controller basepath (default = PATH_TO_WEB_PLATFORM) 
+	 * @config.controller base path (default = PATH_TO_WEB_PLATFORM)
 	 * 
 	*/
-	'controller.basepath' => func()->const('web_platform'),
+	'controller.base.path' => func()->const('web_platform'),
 
 	/*
 	 ***************************
@@ -240,7 +240,7 @@ $config->finder([
 	 ***************************
 	 * 
 	 * @finder.autoloader (default = array ) 
-	 * info: Enables quick access to files inside these directories listed in the array via namespacing.
+	 * info: Enables quick access to files inside these directories listed in the array via folder autoload.
 	*/
 	'autoloader' => [
 		// eg. HOME .'/modules/*',
@@ -252,10 +252,10 @@ $config->finder([
 	/*
 	 ***************************
 	 * 
-	 * @finder.namespacing (default = array ) 
-	 * info: Enables quick access to files through namespacing
+	 * @finder.namespaces (default = array )
+	 * info: Enables quick access to files through namespaces
 	*/
-	'namespacing' => [
+	'namespaces' => [
 		'Plugin\*'	  			=> get_path(func()->const('plugin'), ''),
 		'Moorexa\Events\*'  	=> get_path(func()->const('event'), ''),
 	]

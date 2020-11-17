@@ -11,7 +11,7 @@ require_once 'init.php';
 /**
  * @package  Moorexa PHP Framework
  * @author   Fregatelab inc http://fregatelab.com
- * @author   Amadi ifeanyi <amadiify.com>
+ * @author   Amadi ifeanyi http://amadiify.com
  * @version  0.0.1
  */
 
@@ -30,16 +30,16 @@ try {
    $engine->setEncoding('UTF-8');
 
    // apply default time zone
-   $engine->setTimeZone(DEFAULT_TIME_ZONE);
+   $engine->setTimeZone(constant('DEFAULT_TIME_ZONE'));
 
    // apply default content type
-   $engine->setContentType(DEFAULT_CONTENT_TYPE);
+   $engine->setContentType(constant('DEFAULT_CONTENT_TYPE'));
 
    // clear buffer if sent already
    if (strlen(ob_get_contents()) > 5) ob_end_clean();
 
    // load default packager
-   $engine->defaultPackageManager($payload, $MAIN_PACKAGER);
+   if (isset($MAIN_PACKAGER)) $engine->defaultPackageManager($payload, $MAIN_PACKAGER);
 
    // boot application
    $engine->bootProgram($payload, ClassManager::singleton(PayloadRunner::class)->clearPayloads());

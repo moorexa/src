@@ -1490,7 +1490,7 @@ class Assist
             self::out($ass->ansii('bold')."\nnew {$command}\n");
 
             // set base path
-            self::$controllerBasePath = env('bootstrap', 'controller.basepath');
+            self::$controllerBasePath = env('bootstrap', 'controller.base.path');
 
             // append forward slash to base path
             self::$controllerBasePath = rtrim(self::$controllerBasePath, '/');

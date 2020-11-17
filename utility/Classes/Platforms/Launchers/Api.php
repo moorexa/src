@@ -1,10 +1,13 @@
 <?php
 namespace Classes\Platforms\Launchers;
 
+use Lightroom\Exceptions\PackageManagerException;
 use Lightroom\Core\{
     Payload, BootCoreEngine
 };
 use Classes\Platforms\PlatformInterface;
+use ReflectionException;
+
 /**
  * @package Api Launcher
  * @author Amadi Ifeamyi <amadiify.com>
@@ -25,6 +28,8 @@ class Api implements PlatformInterface
      * @param Payload $payload
      * @param BootCoreEngine $engine
      * @return bool
+     * @throws PackageManagerException
+     * @throws ReflectionException
      */
     public function loadPlatform(Payload &$payload, BootCoreEngine $engine) : bool
     {

@@ -13,6 +13,9 @@
     __DIR__ . '/assist',
  ];
 
+ // @var bool $standardInput
+ $standardInput = isset($_SERVER['standard_input']) ? true : false;
+
  // get the root directory
  $rootDirectory = !isset($rootDirectory) ? __DIR__ . '/../' : $rootDirectory;
 
@@ -95,75 +98,94 @@
    return ($input == '') ? $default : $input;
  };
 
- // ask for content type
- $contentType = $readInput('Please enter a default content type. (Tap Enter to use default "'.$contentType.'")', $contentType);
+ // not standard input
+ if ($standardInput === false) :
 
- // ask for default time zone
- $defaultTimeZone = $readInput('Please enter a default time zone. (Tap Enter to use default "'.$defaultTimeZone.'")', $defaultTimeZone);
+    // ask for content type
+    $contentType = $readInput('Please enter a default content type. (Tap Enter to use default "'.$contentType.'")', $contentType);
 
- // create constant for content type
- $initContent .= "\n\n// default content type\n" . 'define(\'DEFAULT_CONTENT_TYPE\', \''.$contentType.'\');';
+    // ask for default time zone
+    $defaultTimeZone = $readInput('Please enter a default time zone. (Tap Enter to use default "'.$defaultTimeZone.'")', $defaultTimeZone);
 
- // create constant for timezone
- $initContent .= "\n\n// default timezone\n" . 'define(\'DEFAULT_TIME_ZONE\', \''.$defaultTimeZone.'\');';
+    // create constant for content type
+    $initContent .= "\n\n// default content type\n" . 'define(\'DEFAULT_CONTENT_TYPE\', \''.$contentType.'\');';
 
- // get default controller 
- $defaultController = $readInput('Please enter a default controller name. (Tap Enter to use default "@starter")', '@starter');
+    // create constant for timezone
+    $initContent .= "\n\n// default timezone\n" . 'define(\'DEFAULT_TIME_ZONE\', \''.$defaultTimeZone.'\');';
 
- // get default view
- $defaultView = $readInput('Please enter a default view name. (Tap Enter to use default "home")', 'home');
+    // get default controller 
+    $defaultController = $readInput('Please enter a default controller name. (Tap Enter to use default "@starter")', '@starter');
 
- // create file in the root directory
- file_put_contents($rootDirectory . 'init.php', $initContent);
+    // get default view
+    $defaultView = $readInput('Please enter a default view name. (Tap Enter to use default "home")', 'home');
 
- // delete file
- if (file_exists($rootDirectory . 'init.php')) :
+    // create file in the root directory
+    file_put_contents($rootDirectory . 'init.php', $initContent);
 
-    // remove the init file
-    unlink(__DIR__ . '/init.php');
+    // delete file
+    if (file_exists($rootDirectory . 'init.php')) :
 
-    // update config for micro project
-    if ($projectType == 'micro') :
+        // remove the init file
+        unlink(__DIR__ . '/init.php');
 
-      // set micro config body
-      $microConfig = '# Beautiful url' . "\n";
-      $microConfig .= 'beautiful_url_target : __app_request__' . "\n";
-      $microConfig .= '# Router global configuration' . "\n";
-      $microConfig .= 'router :' . "\n";
-      $microConfig .= ' # set default controller and view ' . "\n";
-      $microConfig .= ' default : ' . "\n";
-      $microConfig .= '  controller : \''.$defaultController.'\'' . "\n";
-      $microConfig .= '  view : \''.$defaultView.'\'' . "\n";
-      $microConfig .= '# actions for model' . "\n";
-      $microConfig .= 'actions : ' . "\n";
-      $microConfig .= " - add\n - create\n - edit\n - delete\n - show";
+        // update config for micro project
+        if ($projectType == 'micro') :
 
-      // update config.yaml file
-      if (file_exists(__DIR__ . '/config.yaml')) file_put_contents(__DIR__ . '/config.yaml', $microConfig);
+          // set micro config body
+          $microConfig = '# Beautiful url' . "\n";
+          $microConfig .= 'beautiful_url_target : __app_request__' . "\n";
+          $microConfig .= '# Router global configuration' . "\n";
+          $microConfig .= 'router :' . "\n";
+          $microConfig .= ' # set default controller and view ' . "\n";
+          $microConfig .= ' default : ' . "\n";
+          $microConfig .= '  controller : \''.$defaultController.'\'' . "\n";
+          $microConfig .= '  view : \''.$defaultView.'\'' . "\n";
+          $microConfig .= '# actions for model' . "\n";
+          $microConfig .= 'actions : ' . "\n";
+          $microConfig .= " - add\n - create\n - edit\n - delete\n - show";
+
+          // update config.yaml file
+          if (file_exists(__DIR__ . '/config.yaml')) file_put_contents(__DIR__ . '/config.yaml', $microConfig);
+
+        endif;
+
+        // update config for default project
+        if ($projectType == 'default' && file_exists(__DIR__ . '/config.yaml')) :
+
+          // read config
+          $configContent = file_get_contents(__DIR__ . '/config.yaml');
+
+          // update controller
+          $configContent = str_replace('@starter', $defaultController, $configContent);
+
+          // update view
+          $configContent = str_replace("'home'", $defaultView, $configContent);
+
+          // save now
+          file_put_contents(__DIR__ . '/config.yaml', $configContent);
+
+        endif;
+
+        // remove installer file
+        unlink(__DIR__ . '/install.php');
+
+        // installation complete
+        fwrite(STDOUT, 'Installation complete.' . PHP_EOL);
 
     endif;
 
-    // update config for default project
-    if ($projectType == 'default' && file_exists(__DIR__ . '/config.yaml')) :
+// end
+else:
 
-      // read config
-      $configContent = file_get_contents(__DIR__ . '/config.yaml');
+  // ok return response
+  echo json_encode([
+    'initContent'     => $initContent,
+    'defaultTimeZone' => $defaultTimeZone,
+    'projectType'     => $projectType,
+    'contentType'     => $contentType
+  ], JSON_PRETTY_PRINT);
 
-      // update controller
-      $configContent = str_replace('@starter', $defaultController, $configContent);
+  // remove installer file
+  unlink(__DIR__ . '/install.php');
 
-      // update view
-      $configContent = str_replace("'home'", $defaultView, $configContent);
-
-      // save now
-      file_put_contents(__DIR__ . '/config.yaml', $configContent);
-
-    endif;
-
-    // remove installer file
-    unlink(__DIR__ . '/install.php');
-
-    // installation complete
-    fwrite(STDOUT, 'Installation complete.' . PHP_EOL);
-
- endif;
+endif;

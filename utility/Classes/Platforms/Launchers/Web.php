@@ -1,10 +1,13 @@
 <?php
 namespace Classes\Platforms\Launchers;
 
+use Lightroom\Exceptions\PackageManagerException;
 use Lightroom\Core\{
     Payload, BootCoreEngine
 };
 use Classes\Platforms\PlatformInterface;
+use ReflectionException;
+
 /**
  * @package Web Launcher
  * @author Amadi Ifeamyi <amadiify.com>
@@ -12,12 +15,14 @@ use Classes\Platforms\PlatformInterface;
 class Web implements PlatformInterface
 {
     use Helper;
-    
+
     /**
      * @method PlatformInterface loadPlatform
      * @param Payload $payload
      * @param BootCoreEngine $engine
      * @return bool
+     * @throws PackageManagerException
+     * @throws ReflectionException
      */
     public function loadPlatform(Payload &$payload, BootCoreEngine $engine) : bool
     {

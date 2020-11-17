@@ -28,7 +28,7 @@ if ($configuration !== null) :
 
     $callback = function ($msg) {
 
-        // unserializd body
+        // un-serialize body
         $class = unserialize($msg->body);
 
         // print job name
@@ -40,7 +40,7 @@ if ($configuration !== null) :
         // continue if class does not exists
         if (!class_exists($closureScope['namespace'])) :
 
-            // register alaise
+            // register alias
             BootCoreEngine::registerAliases([
                 // register closure class
                 $closureScope['namespace'] => $closureScope['file']

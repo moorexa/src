@@ -25,7 +25,7 @@ session:
   # set driver class.
   # class must implements Lightroom\Requests\Interfaces\DatabaseDriverInterface
   class: Lightroom\Requests\Drivers\Database\Session
-  # set the connection identifier for session database driver, just incase you don't want to use the default
+  # set the connection identifier for session database driver, just in case you don't want to use the default
   # you can always switch connection with env_set('session/identifier', '<identifier>')
   identifier:
 
@@ -36,7 +36,7 @@ cookie:
   # set driver class.
   # class must implements Lightroom\Requests\Interfaces\DatabaseDriverInterface
   class: Lightroom\Requests\Drivers\Database\Cookie
-  # set the connection identifier for cookie database driver, just incase you don't want to use the default
+  # set the connection identifier for cookie database driver, just in case you don't want to use the default
   # you can always switch connection with env_set('cookie/identifier', '<identifier>')
   identifier:
 
@@ -51,7 +51,7 @@ database:
     mssql: 
     sqlite: 
     postgresql: 
-  # block a subscriber from listening to queries, commiting to database or rolling back transactions
+  # block a subscriber from listening to queries, committing to database or rolling back transactions
   blocked_subscribers:
     - robot
     - faker
@@ -62,7 +62,7 @@ database:
 swiftmailer:
   # outgoing server
   # eg (mail.example.com or smtp.example.com)
-  outgoing: 'smtp.mailtrap.io'
+  outgoing: ''
   # transport (default is 0)
   # change to (/usr/sbin/sendmail -bs) to use Sendmail as a transport:
   transport: 0
@@ -74,15 +74,15 @@ swiftmailer:
   users :
    account:
       #eg info@example.com
-      user: '5a3989295069d7'
+      user: ''
       # user password
-      password: 'df646b75f7ce38'
-# deploy configurtion
+      password: ''
+# deploy configuration
 deploy:
   # set the url
   url : 'http://'
   # set the token
-  token : '$2y$10$xQUvREqEXPFhP4LwR3ZVU.P3ki8moJen9iTFrfPKQXVLDlaJgGiMS'
+  token : ''
 # error helper class
 pageNotFound: ''
 # enable template caching
@@ -148,7 +148,7 @@ socket:
 # Doc guides: https://rabbitmq.com/documentation.html
 # Please ensure you have rabbitmq installed on your machine
 # To start the server, just run 'rabbitmq-server' from your terminal, 
-# on a new tab run 'php assist start-rabbitmq-worker' to listen for jobs. See Mooreexa documentation. 
+# on a new tab run 'php assist start-rabbitmq-worker' to listen for jobs. See Moorexa documentation.
 rabbitmq:
   # set the connection address
   address : 'localhost'

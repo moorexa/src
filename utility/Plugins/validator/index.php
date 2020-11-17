@@ -24,7 +24,7 @@ class Validator
     // error messages
     private $errors = [
         'min' => 'Invalid character length',
-        'max' => 'Charater too long. Maximum length is {:length}',
+        'max' => 'Character too long. Maximum length is {:length}',
         'alpha' => 'Must contain alphabets and numbers only',
         'number' => 'Must contain numbers only',
         'text' => 'Cannot contain anything other than alphabets only',
@@ -50,7 +50,7 @@ class Validator
     public function __construct($data)
     {
         $this->type = is_object($data) ? 'object' : 'array';
-        $this->data = is_object($data) ? toArray($data) : $data;
+        $this->data = is_object($data) ? func()->toArray($data) : $data;
     }
 
     // regxp
@@ -190,9 +190,9 @@ class Validator
     // notag
     private function notag(string $str)
     {
-        $uncode = html_entity_decode($str);
+        $decode = html_entity_decode($str);
 
-        if (preg_match("/[<]([a-zA-Z]{1,}+\s{0,1})([^>]+|)[>|]/m", $uncode))
+        if (preg_match("/[<]([a-zA-Z]+\s?)([^>]+|)[>|]/m", $decode))
         {
             return false;
         }
@@ -232,7 +232,7 @@ class Validator
     {
         $format = trim(preg_replace("/\s*[(]/", '', $format));
         $format = rtrim($format, ')');
-        $datetime = new DateTime($val);
+        $datetime = new \DateTime($val);
         $onFormat = $datetime->format($format);
         if (strcmp($val, $onFormat) === 0)
         {
@@ -343,7 +343,7 @@ class Validator
             }
             else
             {
-                if (preg_match("/([^@]+)[@]{1}([^.|@]+)[.]\w{1,}/", $str))
+                if (preg_match("/([^@]+)[@]([^.|@]+)[.]\w+/", $str))
                 {
                     return true;
                 }
@@ -431,7 +431,7 @@ class Validator
                             }
                             else
                             {
-                                $errors[$string][] = 'Null value encounted. Rule ('.$meth.') didn\'t apply, validation failed';
+                                $errors[$string][] = 'Null value encountered. Rule ('.$meth.') didn\'t apply, validation failed';
                             }
                         }
                         else
@@ -447,7 +447,7 @@ class Validator
             {
                 if ($this->type == 'object')
                 {
-                    $this->data = toObject($this->data);
+                    $this->data = func()->toObject($this->data);
                     $post = $this->data; 
                 }
 
@@ -456,7 +456,7 @@ class Validator
 
             if ($this->type == 'object')
             {
-                $this->success = toObject($this->success);
+                $this->success = func()->toObject($this->success);
                 $post = $this->success; 
             }
 

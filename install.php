@@ -177,13 +177,13 @@
 // end
 else:
 
-  // ok return response
-  echo json_encode([
+  // ok save response
+  file_put_contents(__DIR__ . '/installResponse.txt', json_encode([
     'initContent'     => $initContent,
     'defaultTimeZone' => $defaultTimeZone,
     'projectType'     => $projectType,
     'contentType'     => $contentType
-  ], JSON_PRETTY_PRINT);
+  ], JSON_PRETTY_PRINT));
 
   // remove installer file
   unlink(__DIR__ . '/install.php');

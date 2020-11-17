@@ -14,7 +14,10 @@
  ];
 
  // @var bool $standardInput
- $standardInput = isset($_SERVER['standard_input']) ? true : false;
+ $standardInput = false;
+
+ // check in args
+ if (in_array('--standardInput', $_SERVER['argv'])) $standardInput = true;
 
  // get the root directory
  $rootDirectory = !isset($rootDirectory) ? __DIR__ . '/../' : $rootDirectory;

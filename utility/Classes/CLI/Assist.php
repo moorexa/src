@@ -5812,7 +5812,7 @@ class Assist
         }
         
 
-        bgExec("php -S localhost:{$port} -c ".get_path(PATH_TO_KERNEL, '/php.ini'). ' ' . __DIR__ . '/Router.php');
+        bgExec("php -S localhost:{$port} -c ".get_path(constant('PATH_TO_KERNEL'), '/php.ini'). ' ' . constant('PATH_TO_UTILITY') . '/Classes/CLI/Router.php');
 
         if (!$notab) :
         

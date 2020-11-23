@@ -135,7 +135,7 @@
         if ($projectType == 'micro') :
 
           // set micro config body
-          $microConfig = '# Beautiful url' . "\n";
+          $microConfig  = '# Beautiful url' . "\n";
           $microConfig .= 'beautiful_url_target : __app_request__' . "\n";
           $microConfig .= '# Router global configuration' . "\n";
           $microConfig .= 'router :' . "\n";

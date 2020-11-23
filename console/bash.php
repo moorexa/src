@@ -67,7 +67,7 @@ try {
                 'start' => [
                     function () {
                         // Set RIGHT privileges for root dir:
-                        Assist::runCliCommand('sudo chmod -R 777 ' . $_SERVER['PWD'] . '/');
+                        Assist::runCliCommand('sudo chmod -R 777 ' . (isset($_SERVER['PWD']) ? $_SERVER['PWD'] : '') . '/');
                     },
                     // generate unique openssl key
                     'php assist generate certificate',

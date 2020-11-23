@@ -19,7 +19,7 @@ $socket = var_set('socket', ClassManager::singleton(ConfigurationSocketHandler::
  */
 /** @var mixed $config */
 $config->configurationSocket([
-	'bootstrap'  => $socket->setClass(Lightroom\Packager\Moorexa\BootloaderConfiguration::class)->setMethod('loadBootstrap'),
+	'bootstrap'  	 => $socket->setClass(Lightroom\Packager\Moorexa\BootloaderConfiguration::class)->setMethod('loadBootstrap'),
 	'finder'	     => $socket->setClass(Lightroom\Packager\Moorexa\BootloaderConfiguration::class)->setMethod('loadFinder'),
 ]);
 
@@ -177,7 +177,7 @@ $config->bootstrap ([
 	 ***************************
 	 * 
 	 * @config.filter-input (default = true) 
-	 * info: allow moorexa to filter user input, provides a safer output against injections.
+	 * info: allow moorexa to filter user input, provides a safer input against injections.
 	*/
 	'filter-input' => true,
 
@@ -240,7 +240,7 @@ $config->finder([
 	 ***************************
 	 * 
 	 * @finder.autoloader (default = array ) 
-	 * info: Enables quick access to files inside these directories listed in the array via folder autoload.
+	 * info: The goal here is to help you register nested folders that acts as a namespace to a file.
 	*/
 	'autoloader' => [
 		// eg. HOME .'/modules/*',
@@ -253,7 +253,7 @@ $config->finder([
 	 ***************************
 	 * 
 	 * @finder.namespaces (default = array )
-	 * info: Enables quick access to files through namespaces
+	 * info: The goal here is to help the PHP spl_autoload function watch for a pattern in a namespace and load from a registered directory if the file exists.
 	*/
 	'namespaces' => [
 		'Plugin\*'	  			=> get_path(func()->const('plugin'), ''),

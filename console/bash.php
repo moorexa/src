@@ -327,81 +327,107 @@ try {
                     // replace name
                     $command = (trim($command) == '') ? 'require' : $command;
 
-                    // check for composer
-                    $composerFiles = [HOME . '/composer', HOME . '/composer.phar'];
+                    // install composer
+                    if ($command == 'composer') :
 
-                    // load dependencies file
-                    $dependencies = get_path(func()->const('config'), '/dependencies.php');
+                        // check note
+                        Assist::out('Checking for composer in root directory' . PHP_EOL);
 
-                    // load from array ?
-                    if (file_exists($dependencies)) :
+                        // check for composer
+                        if (file_exists(HOME . '/composer')) : return Assist::out('Could not continue. You already have composer installed.'); endif;
 
-                        // read data
-                        $data = include $dependencies;
+                        // run composer installation
+                        pclose(popen('php -r "copy(\'https://getcomposer.org/installer\', \'composer-setup.php\');"', "w"));
+                        pclose(popen('php -r "if (hash_file(\'sha384\', \'composer-setup.php\') === \'756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3\') { echo \'Installer verified\'; } else { echo \'Installer corrupt\'; unlink(\'composer-setup.php\'); } echo PHP_EOL;"', 'w'));
+                        sleep(2);
 
-                        // continue with array
-                        if (is_array($data)) :
+                        // continue if file exists
+                        if (file_exists(HOME . '/composer-setup.php')) :
+                            
+                            pclose(popen('php composer-setup.php --filename=composer', 'w'));
+                            pclose(popen('php -r "unlink(\'composer-setup.php\');"', 'w'));
+                            
+                        endif;
 
-                            // load packages
-                            if (isset($data[$command])) :
+                    else :
 
-                                // load flag
-                                $flag = isset($data['flag']) ? $data['flag'] : '--no-update';
+                        // check for composer
+                        $composerFiles = [HOME . '/composer', HOME . '/composer.phar'];
 
-                                // list as string
-                                $packages = [];
+                        // load dependencies file
+                        $dependencies = get_path(func()->const('config'), '/dependencies.php');
 
-                                // run loop
-                                foreach ($data[$command] as $id => $package) :
-                                    // add
-                                    $packages[] = ($package == '*') ? ("'$id:$package'") : "'$package'";
-                                endforeach;
+                        // load from array ?
+                        if (file_exists($dependencies)) :
 
-                                // finally,
-                                $packages = implode(' ', $packages);
+                            // read data
+                            $data = include $dependencies;
 
-                                // add flag
-                                $packages .= ' ' . $flag;
+                            // continue with array
+                            if (is_array($data)) :
 
-                                // start
-                                $start = 'composer require ';
+                                // load packages
+                                if (isset($data[$command])) :
 
-                                // process now
-                                foreach ($composerFiles as $file) :
+                                    // load flag
+                                    $flag = isset($data['flag']) ? $data['flag'] : '--no-update';
 
-                                    // which is available
-                                    if (file_exists($file)) :
+                                    // list as string
+                                    $packages = [];
 
-                                        // get file
-                                        $start = 'php ' . basename($file) . ' require ';
+                                    // run loop
+                                    foreach ($data[$command] as $id => $package) :
+                                        // add
+                                        $packages[] = ($package == '*') ? ("'$id:$package'") : "'$package'";
+                                    endforeach;
 
-                                        // break out
-                                        break;
+                                    // finally,
+                                    $packages = implode(' ', $packages);
 
-                                    endif;
+                                    // add flag
+                                    $packages .= ' ' . $flag;
 
-                                endforeach;
+                                    // start
+                                    $start = 'composer require ';
 
-                                // append packages
-                                $packages = $start . $packages;
+                                    // process now
+                                    foreach ($composerFiles as $file) :
 
-                                // should we update composer at the end ?
-                                if (strpos($packages, '--no-update') !== false) $packages .= '; ' . str_replace('require', 'update', $start) . ';';
+                                        // which is available
+                                        if (file_exists($file)) :
 
-                                // process now
-                                Assist::runCliCommand($packages);
+                                            // get file
+                                            $start = 'php ' . basename($file) . ' require ';
+
+                                            // break out
+                                            break;
+
+                                        endif;
+
+                                    endforeach;
+
+                                    // append packages
+                                    $packages = $start . $packages;
+
+                                    // should we update composer at the end ?
+                                    if (strpos($packages, '--no-update') !== false) $packages .= '; ' . str_replace('require', 'update', $start) . ';';
+
+                                    // process now
+                                    Assist::runCliCommand($packages);
+
+                                else:
+
+                                    // could not load package
+                                    Assist::out('Could not load packages within this category "' . $command . '", check spellings.' . PHP_EOL);
+
+                                endif;
 
                             else:
 
-                                // could not load package
-                                Assist::out('Could not load packages within this category "' . $command . '", check spellings.' . PHP_EOL);
+                                // invalid file
+                                Assist::out('Invalid dependency file \'' . $dependencies . '\'. Expected a return type of array.' . PHP_EOL);
 
                             endif;
-
-                        else:
-
-                            // invalid file
-                            Assist::out('Invalid dependency file \'' . $dependencies . '\'. Expected a return type of array.' . PHP_EOL);
 
                         endif;
 

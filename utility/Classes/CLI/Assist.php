@@ -1613,8 +1613,8 @@ class Assist
                                 $file[] = ['Provider.php', $check, decryptAssist($provider)];
                                 $file[] = ['config.php', $check, decryptAssist($config)];
                                 $file[] = ['readme.md', $check, decryptAssist($readme)];
-                                if (strpos($directoriesExcluded, CONTROLLER_CUSTOM) === false) $file[] = ['header.html', $check . CONTROLLER_CUSTOM.'/', decryptAssist($header)];
-                                if (strpos($directoriesExcluded, CONTROLLER_CUSTOM) === false) $file[] = ['footer.html', $check . CONTROLLER_CUSTOM . '/', str_replace('$viewjs', '$viewJs', decryptAssist($footer))];
+                                if (strpos($directoriesExcluded, CONTROLLER_CUSTOM) === false) $file[] = ['header.html', $check . CONTROLLER_CUSTOM.'/', str_replace('$viewCss', '', decryptAssist($header))];
+                                if (strpos($directoriesExcluded, CONTROLLER_CUSTOM) === false) $file[] = ['footer.html', $check . CONTROLLER_CUSTOM . '/', str_replace('$viewjs', '', decryptAssist($footer))];
                                 if (strpos($directoriesExcluded, CONTROLLER_STATIC) === false) $file[] = [$page .'.js', $check . CONTROLLER_STATIC . '/'];
                                 if (strpos($directoriesExcluded, CONTROLLER_STATIC) === false) $file[] = [$page .'.css', $check . CONTROLLER_STATIC .'/'];
                                 if (strpos($directoriesExcluded, CONTROLLER_PARTIAL) === false) $file[] = ['.re', $check . CONTROLLER_PARTIAL . '/'];

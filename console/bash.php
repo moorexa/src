@@ -70,7 +70,7 @@ try {
                         Assist::runCliCommand('sudo chmod -R 777 ' . (isset($_SERVER['PWD']) ? $_SERVER['PWD'] : '') . '/');
                     },
                     // generate unique openssl key
-                    'php assist generate certificate',
+                    //'php assist generate certificate',
                     // we would clean up the caching system
                     'php assist cache clean',
                     // we would generate a new secret key for our application and for encryption

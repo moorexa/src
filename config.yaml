@@ -30,3 +30,5 @@ actions :
   - edit
   - delete
   - show
+# javascript script type
+javascript_type : 'application/javascript'

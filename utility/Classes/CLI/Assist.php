@@ -2095,15 +2095,7 @@ class Assist
                             }
                             else
                             {
-                                if (in_array($modelName, $private))
-                                {
-                                    self::out($ass->ansii('red'). "Operation canceled. '$modelName' is private.\n");
-                                }
-                                else
-                                {
-                                    self::out($ass->ansii('red'). "Operation canceled.\n");
-                                }
-
+                                self::out($ass->ansii('red'). "Operation canceled.\n");
                             }
                         }
                         else

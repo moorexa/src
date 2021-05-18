@@ -12,6 +12,10 @@ use Lightroom\Packager\Moorexa\MVC\Helpers\ControllerLoader;
 use Lightroom\Database\ConnectionSettings as Connection;
 use function Lightroom\Database\Functions\{query, schema, db, db_with};
 use Lightroom\Adapter\Configuration\Environment;
+
+// define GLOB_BRACE
+if(!defined('GLOB_BRACE')) define('GLOB_BRACE', 128);
+
 /**˚
  * @package Moorexa CLI Assist Manager
  * @version 0.0.1

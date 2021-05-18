@@ -7,6 +7,9 @@ use Lightroom\Exceptions\{
     ClassNotFound, InterfaceNotFound
 };
 
+// define GLOB_BRACE
+if(!defined('GLOB_BRACE')) define('GLOB_BRACE', 128);
+
 /**
  * @method Assist encryptAssist
  * @param string $data

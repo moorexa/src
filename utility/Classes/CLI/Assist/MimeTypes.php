@@ -276,7 +276,7 @@ return array (
     'lasxml' => 'application/vnd.las.las+xml',
     'lbd' => 'application/vnd.llamagraphics.life-balance.desktop',
     'lbe' => 'application/vnd.llamagraphics.life-balance.exchange+xml',
-    123 => 'application/vnd.lotus-1-2-3',
+    '123' => 'application/vnd.lotus-1-2-3',
     'apr' => 'application/vnd.lotus-approach',
     'pre' => 'application/vnd.lotus-freelance',
     'nsf' => 'application/vnd.lotus-notes',

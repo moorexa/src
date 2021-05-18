@@ -14,6 +14,9 @@
  // DEFINE ROOT
  define ('__ROOT__', '.');
 
+ // define GLOB_BRACE
+ if(!defined('GLOB_BRACE')) define('GLOB_BRACE', 128);
+
  // class definition here.. 
  class DeployProject
  {

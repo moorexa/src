@@ -13,6 +13,9 @@
     __DIR__ . '/assist',
  ];
 
+ // define GLOB_BRACE if not defined.
+ if (!defined('GLOB_BRACE')) define('GLOB_BRACE', 128);
+
  // @var bool $standardInput
  $standardInput = false;
 

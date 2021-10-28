@@ -5140,7 +5140,7 @@ class Assist
     }
 
     // get deploy zip file
-    private function getDeployZipFile(&$zipfiles, &$haslognew, &$log, &$allfiles=[], $dir)
+    private function getDeployZipFile(&$zipfiles, &$haslognew, &$log, &$allfiles=[], $dir='')
     {
         error_reporting(E_ALL);
 

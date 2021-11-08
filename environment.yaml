@@ -68,6 +68,8 @@ swiftmailer:
   transport: 0
   # connection port
   port : 2525
+  # smtp encryption (tls, ssl)
+  encryption : ''
   # default user
   default: account
   # users, multiple users supported

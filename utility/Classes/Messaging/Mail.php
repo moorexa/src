@@ -16,6 +16,9 @@ class Mail
     // smtp port
     private $smtpPort;
 
+    // smtp encryption
+    private $smtpEncryption = null;
+
     // transport instance
     private static $transport = null;
 
@@ -36,6 +39,9 @@ class Mail
 
             // set the port
             $this->smtpPort = isset($mailer['port']) ? $mailer['port'] : $this->smtpPort;
+
+            // set the encryption 
+            $this->smtpEncryption = isset($mailer['encryption']) ? $mailer['encryption'] : $this->smtpEncryption;
 
             // set the username and password
             // look for default
@@ -94,7 +100,7 @@ class Mail
             }
 
             // Create the Transport
-            $transport = (new \Swift_SmtpTransport($ins->smtpHost, $ins->smtpPort))
+            $transport = (new \Swift_SmtpTransport($ins->smtpHost, $ins->smtpPort, $ins->smtpEncryption))
             ->setUsername($ins->smtpUser)
             ->setPassword($ins->smtpPass)
             ;

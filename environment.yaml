@@ -58,8 +58,8 @@ database:
   # state manager database settings
   state_manager_sqlite_db : 'state_manager.db'
 
-# Swift mailer configuration
-swiftmailer:
+# Mailer configuration
+mailer:
   # outgoing server
   # eg (mail.example.com or smtp.example.com)
   outgoing: ''

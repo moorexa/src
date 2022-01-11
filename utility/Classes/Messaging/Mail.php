@@ -29,10 +29,10 @@ class Mail
     public function __construct()
     {
         // load from env
-        if (isset($_ENV['swiftmailer'])) : 
+        if (isset($_ENV['mailer'])) : 
 
             // @var array mailer
-            $mailer = $_ENV['swiftmailer'];
+            $mailer = $_ENV['mailer'];
 
             // set the smtp host
             $this->smtpHost = isset($mailer['outgoing']) ? $mailer['outgoing'] : $this->smtpHost;

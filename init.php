@@ -14,7 +14,7 @@ if (file_exists('.global.config')) include_once '.global.config';
 if (!defined('APPLICATION_ROOT')) define('APPLICATION_ROOT', './');
 
 // define base path for framework system files
-define('FRAMEWORK_BASE_PATH', APPLICATION_ROOT . 'system');
+define('FRAMEWORK_BASE_PATH', APPLICATION_ROOT . 'system/');
 
 //register global core
 define('GLOBAL_CORE', (isset($GLOBALCORE) ? $GLOBALCORE : FRAMEWORK_BASE_PATH));
@@ -23,7 +23,7 @@ define('GLOBAL_CORE', (isset($GLOBALCORE) ? $GLOBALCORE : FRAMEWORK_BASE_PATH));
 // this folder contains configuration directory, components, database, extensions, public, services and much more
 // it's advisable you change it, including the framework base path after obtaining a copy of moorexa.
 // We are doing this just to add an extra layer of security, so you stay unique and invisible.
-define('DISTRIBUTION_BASE_PATH',  APPLICATION_ROOT . 'src');
+define('DISTRIBUTION_BASE_PATH',  APPLICATION_ROOT . 'src/');
 
 // add source path
 define('SOURCE_BASE_PATH', (isset($SOURCE_BASE_PATH) ? $SOURCE_BASE_PATH : DISTRIBUTION_BASE_PATH));

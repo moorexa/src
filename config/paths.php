@@ -22,7 +22,13 @@ $constant = new Constants();
  * *******
  * Create base path
  */
-$base = $global->newConstant($constant->name('Home')->value(APPLICATION_ROOT));
+$home = $global->newConstant($constant->name('Home')->value(APPLICATION_ROOT));
+
+/**
+ * *******
+ * Create base path
+ */
+$base = $global->newConstant($constant->name('Base')->value('./'));
 
 /**
  * *******
@@ -59,7 +65,7 @@ $kernel = $base->fromConstant($constant->name('kernel')->value(SOURCE_BASE_PATH)
  * *******
  * Create distribution path
  */
-$dist = $base->newConstant($constant->name('dist')->value(DISTRIBUTION_BASE_PATH));
+$dist = $base->fromConstant($constant->name('dist')->value(DISTRIBUTION_BASE_PATH));
 
 
 // add extra directory

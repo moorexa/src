@@ -11,6 +11,7 @@
  * Ensure this script exists on your server
  */
 
+
  // DEFINE ROOT
  define ('__ROOT__', '.');
 
@@ -542,7 +543,7 @@
     }
 
     // get deploy zip file
-    private function getDeployZipFile(&$zipfiles, &$haslognew, &$log, &$allfiles=[], $dir)
+    private function getDeployZipFile(&$zipfiles, &$haslognew, &$log, &$allfiles=[], $dir = '')
     {
         if (is_dir($dir))
         {

@@ -50,7 +50,7 @@ class Assist
     ];
 
     // assist path
-    public static $assistPath = HOME;
+    public static $assistPath = BASE;
 
     // controller base path
     public static $controllerBasePath = PATH_TO_WEB_PLATFORM;

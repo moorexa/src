@@ -29,7 +29,7 @@ define('DISTRIBUTION_BASE_PATH',  APPLICATION_ROOT . 'src/');
 define('SOURCE_BASE_PATH', (isset($SOURCE_BASE_PATH) ? $SOURCE_BASE_PATH : DISTRIBUTION_BASE_PATH));
 
 // composer path
-define('COMPOSER', APPLICATION_ROOT . 'vendor/autoload.php');
+if (!defined('COMPOSER')) define('COMPOSER', APPLICATION_ROOT . 'vendor/autoload.php');
 
 // require framework autoloader
 require_once  GLOBAL_CORE . '/Core/FrameworkAutoloader.php';
@@ -57,7 +57,7 @@ FrameworkAutoloader::registerNamespace([
 ->registerAutoloader()->secondaryAutoloader(function(){
     
     // composer autoloader
-    $this->autoloadRegister(APPLICATION_ROOT . 'vendor/autoload.php');
+    $this->autoloadRegister(COMPOSER);
     
 })
 // register push event for autoloadFailed events.

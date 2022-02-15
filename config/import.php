@@ -2,7 +2,7 @@
 
 /**
  * @package Import files through require_once
- * @author Amadi Ifeanyi <amadiify.com>, <wekiwork.com>
+ * @author Amadi Ifeanyi <amadiify.com>, <fregatelab.com>
  * 
  * Provided by the Moorexa Packager.
  */

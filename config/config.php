@@ -15,7 +15,7 @@ $socket = var_set('socket', ClassManager::singleton(ConfigurationSocketHandler::
  * Build configuration socket setting
  * We are linking this method via ConfigurationSocketHandler
  * They read a class, and class a method that in turn pushes the return value the Lightroom\Adapter\Configuration\Environment class.
- * You can access this configurations via env(string name, mixed value);
+ * You can access this configurations via get_env(string name, mixed value);
  */
 /** @var mixed $config */
 $config->configurationSocket([

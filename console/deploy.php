@@ -279,6 +279,8 @@
                                 'User-Agent: '.$agent));   
                                 curl_setopt($ch, CURLOPT_TIMEOUT, 86400);
                                 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
                                 $size = filesize($zipfile);
                                 $filesize = $instance->convertToReadableSize($size);
@@ -386,6 +388,8 @@
                         'User-Agent: '.$agent));   
                         curl_setopt($ch, CURLOPT_TIMEOUT, 86400);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
                         $run = curl_exec($ch); 
 

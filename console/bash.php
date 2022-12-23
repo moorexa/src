@@ -144,7 +144,7 @@ try {
             'session' => [
                 'start' => function () {
                     // read env
-                    $driverClass = env('session', 'class');
+                    $driverClass = get_env('session', 'class');
 
                     // check if class exists
                     if (is_string($driverClass) && class_exists($driverClass)) :
@@ -165,7 +165,7 @@ try {
                         $fileName = substr($fileName, 0, strrpos($fileName, '.'));
 
                         // use session connection identifier
-                        $identifier = env('session', 'identifier');
+                        $identifier = get_env('session', 'identifier');
 
                         // we have an identifier
                         if (is_string($identifier) && strlen($identifier) > 1) if (!defined('USE_CONNECTION')) define('USE_CONNECTION', $identifier);
@@ -183,7 +183,7 @@ try {
             'cookie' => [
                 'start' => function () {
                     // read env
-                    $driverClass = env('cookie', 'class');
+                    $driverClass = get_env('cookie', 'class');
 
                     // check if class exists
                     if (is_string($driverClass) && class_exists($driverClass)) :
@@ -204,7 +204,7 @@ try {
                         $fileName = substr($fileName, 0, strrpos($fileName, '.'));
 
                         // use cookie connection identifier
-                        $identifier = env('cookie', 'identifier');
+                        $identifier = get_env('cookie', 'identifier');
 
                         // we have an identifier
                         if (is_string($identifier) && strlen($identifier) > 1) if (!defined('USE_CONNECTION')) define('USE_CONNECTION', $identifier);

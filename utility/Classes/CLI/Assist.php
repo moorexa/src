@@ -1333,7 +1333,7 @@ class Assist
                     // generate random number
                     $num = mt_getrandmax();
                     // get the secret key
-                    $secretkey = str_shuffle(env('bootstrap', 'secret_key'));
+                    $secretkey = str_shuffle(get_env('bootstrap', 'secret_key'));
                     // get server information
                     $server = md5(implode(',', reduce_array(array_values($_SERVER))));
                     // BUILD Token
@@ -1494,7 +1494,7 @@ class Assist
             self::out($ass->ansii('bold')."\nnew {$command}\n");
 
             // set base path
-            self::$controllerBasePath = env('bootstrap', 'controller.base.path');
+            self::$controllerBasePath = get_env('bootstrap', 'controller.base.path');
 
             // append forward slash to base path
             self::$controllerBasePath = rtrim(self::$controllerBasePath, '/');
@@ -5518,6 +5518,8 @@ class Assist
                                 'User-Agent: '.$agent));
                             curl_setopt($ch, CURLOPT_TIMEOUT, 86400);
                             curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
                             $size = filesize($zipfile);
                             $filesize = convertToReadableSize($size);
@@ -5618,6 +5620,8 @@ class Assist
                             'User-Agent: '.$agent));
                         curl_setopt($ch, CURLOPT_TIMEOUT, 86400);
                         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
                         $run = curl_exec($ch);
 
